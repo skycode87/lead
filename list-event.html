@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<title></title>
+
+	<link href="img/favicon.144x144.png" rel="apple-touch-icon" type="image/png" sizes="144x144">
+	<link href="img/favicon.114x114.png" rel="apple-touch-icon" type="image/png" sizes="114x114">
+	<link href="img/favicon.72x72.png" rel="apple-touch-icon" type="image/png" sizes="72x72">
+	<link href="img/favicon.57x57.png" rel="apple-touch-icon" type="image/png">
+	<link href="img/favicon.png" rel="icon" type="image/png">
+	<link href="img/favicon.ico" rel="shortcut icon">
+
+	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+	<!--[if lt IE 9]>
+	<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+	<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
+	<link rel="stylesheet" href="css/lib/datatables-net/datatables.min.css">
+	<link rel="stylesheet" href="css/separate/vendor/datatables-net.min.css">
+	<link rel="stylesheet" href="css/lib/bootstrap-sweetalert/sweetalert.css">
+	<link rel="stylesheet" href="css/separate/vendor/sweet-alert-animations.min.css">
+	<link rel="stylesheet" href="css/lib/font-awesome/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="js/lib/modal/css/component.css" />	
+
+
+	<link rel="stylesheet" href="css/lib/bootstrap/bootstrap.min.css">
+	<link rel="stylesheet" href="css/separate/vendor/bootstrap-select/bootstrap-select.min.css">
+	<link rel="stylesheet" href="css/separate/vendor/select2.min.css">
+	<link rel="stylesheet" href="css/main.css">
+
+	<style>
+
+		table.dataTable{
+			width: 100% !important;
+		}
+
+		.with-side-menu-addl-full .page-content {
+			padding-left: 100px;
+		}
+
+		table.dataTable .tag-color {
+			display: block;
+			width: 16px;
+			height: 16px;
+			background: #000;
+			-webkit-border-radius: 2px;
+			border-radius: 2px;
+			top: 5px;
+			float: left;
+			margin-right: 10px;
+		}
+
+		table.dataTable .tag-color.orange {
+			background-color: #ff7721;
+		}
+
+		.title-datatable{
+			margin-bottom: 10px;
+			position: relative;
+			top: 70px;
+			left: 20px;
+			margin-bottom: 10px
+		}
+
+		.base-datatable{
+			margin-top: -70px;
+		}
+
+		.base-datatable h2{
+			position: relative;
+			top: -10px;
+		}
+
+
+	</style>
+
+</head>
+<body class="with-side-menu-addl-full">
+
+
+	<div class="md-modal md-effect-1" id="modal-1">
+		<div class="md-content">
+			<h3>New Lead</h3>
+			<div class="box-typical box-typical-padding">
+				
+				<form id="form-new-lead">
+
+					<div class="row">
+						<div class="col-lg-6">
+							<fieldset class="form-group">
+								<label class="form-label semibold" for="exampleInput" style="color:#000">First Name</label>
+								<input type="text" class="form-control" id="firstname" placeholder="Enter First Name">
+							</fieldset>
+						</div>
+						<div class="col-lg-6">
+							<fieldset class="form-group">
+								<label class="form-label semibold" for="exampleInputEmail1" style="color:#000" >Last Name</label>
+								<input type="email" class="form-control" id="lastname" placeholder="Enter  LastName" >
+							</fieldset>
+						</div>
+						<div class="col-lg-6">
+							<fieldset class="form-group">
+								<label class="form-label semibold" for="exampleInputPassword1" style="color:#000">Email</label>
+								<input type="text" class="form-control" id="email" placeholder="Enter Email">
+							</fieldset>
+						</div>
+
+						<div class="col-lg-6">
+							<fieldset class="form-group">
+								<label class="form-label semibold" for="exampleInputPassword1" style="color:#000">Phone</label>
+								<input type="text" class="form-control" id="phone" placeholder="Enter Phone">
+							</fieldset>
+						</div>
+
+						<div class="col-lg-12">
+							<fieldset class="form-group">
+								<button type="button" id="submit-lead" class="btn btn-inline btn-success">Continue</button>
+								<button type="button"   class="btn btn-inline btn-danger md-close">Cancel</button>
+							</fieldset>
+						</div>
+
+
+
+					</div>
+				</form>
+
+				
+			</div>
+		</div>
+	</div>
+
+
+	<header class="site-header">
+		<div class="container-fluid">
+
+			<a href="#" class="site-logo">
+				<img class="hidden-md-down" src="img/logo-2.png" alt="">
+				<img class="hidden-lg-up" src="img/logo-2-mob.png" alt="">
+			</a>
+
+			<button id="show-hide-sidebar-toggle" class="show-hide-sidebar">
+				<span>toggle menu</span>
+			</button>
+
+			<button class="hamburger hamburger--htla">
+				<span>toggle menu</span>
+			</button>
+			<div class="site-header-content">
+				<div class="site-header-content-in">
+					<div class="site-header-shown">
+						<div class="dropdown dropdown-notification notif">
+							<a href="#"
+							class="header-alarm dropdown-toggle active"
+							id="dd-notification"
+							data-toggle="dropdown"
+							aria-haspopup="true"
+							aria-expanded="false">
+							<i class="font-icon-alarm"></i>
+						</a>
+						<div class="dropdown-menu dropdown-menu-right dropdown-menu-notif" aria-labelledby="dd-notification">
+							<div class="dropdown-menu-notif-header">
+								Notifications
+								<span class="label label-pill label-danger">4</span>
+							</div>
+							<div class="dropdown-menu-notif-list">
+								<div class="dropdown-menu-notif-item">
+									<div class="photo">
+										<img src="img/photo-64-1.jpg" alt="">
+									</div>
+									<div class="dot"></div>
+									<a href="#">Morgan</a> was bothering about something
+									<div class="color-blue-grey-lighter">7 hours ago</div>
+								</div>
+								<div class="dropdown-menu-notif-item">
+									<div class="photo">
+										<img src="img/photo-64-2.jpg" alt="">
+									</div>
+									<div class="dot"></div>
+									<a href="#">Lioneli</a> had commented on this <a href="#">Super Important Thing</a>
+									<div class="color-blue-grey-lighter">7 hours ago</div>
+								</div>
+								<div class="dropdown-menu-notif-item">
+									<div class="photo">
+										<img src="img/photo-64-3.jpg" alt="">
+									</div>
+									<div class="dot"></div>
+									<a href="#">Xavier</a> had commented on the <a href="#">Movie title</a>
+									<div class="color-blue-grey-lighter">7 hours ago</div>
+								</div>
+								<div class="dropdown-menu-notif-item">
+									<div class="photo">
+										<img src="img/photo-64-4.jpg" alt="">
+									</div>
+									<a href="#">Lionely</a> wants to go to <a href="#">Cinema</a> with you to see <a href="#">This Movie</a>
+									<div class="color-blue-grey-lighter">7 hours ago</div>
+								</div>
+							</div>
+							<div class="dropdown-menu-notif-more">
+								<a href="#">See more</a>
+							</div>
+						</div>
+					</div>
+
+					<div class="dropdown dropdown-notification messages">
+						<a href="#"
+						class="header-alarm dropdown-toggle active"
+						id="dd-messages"
+						data-toggle="dropdown"
+						aria-haspopup="true"
+						aria-expanded="false">
+						<i class="font-icon-mail"></i>
+					</a>
+					<div class="dropdown-menu dropdown-menu-right dropdown-menu-messages" aria-labelledby="dd-messages">
+						<div class="dropdown-menu-messages-header">
+							<ul class="nav" role="tablist">
+								<li class="nav-item">
+									<a class="nav-link active"
+									data-toggle="tab"
+									href="#tab-incoming"
+									role="tab">
+									Inbox
+									<span class="label label-pill label-danger">8</span>
+								</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link"
+								data-toggle="tab"
+								href="#tab-outgoing"
+								role="tab">Outbox</a>
+							</li>
+						</ul>
+	                                <!--<button type="button" class="create">
+	                                    <i class="font-icon font-icon-pen-square"></i>
+	                                </button>-->
+	                            </div>
+	                            <div class="tab-content">
+	                            	<div class="tab-pane active" id="tab-incoming" role="tabpanel">
+	                            		<div class="dropdown-menu-messages-list">
+	                            			<a href="#" class="mess-item">
+	                            				<span class="avatar-preview avatar-preview-32"><img src="img/photo-64-2.jpg" alt=""></span>
+	                            				<span class="mess-item-name">Tim Collins</span>
+	                            				<span class="mess-item-txt">Morgan was bothering about something!</span>
+	                            			</a>
+	                            			
+	                            		</div>
+	                            	</div>
+	                            	<div class="tab-pane" id="tab-outgoing" role="tabpanel">
+	                            		<div class="dropdown-menu-messages-list">
+	                            			<a href="#" class="mess-item">
+	                            				<span class="avatar-preview avatar-preview-32"><img src="img/avatar-2-64.png" alt=""></span>
+	                            				<span class="mess-item-name">Christian Burton</span>
+	                            				<span class="mess-item-txt">Morgan was bothering about something! Morgan was bothering about something...</span>
+	                            			</a>
+
+	                            		</div>
+	                            	</div>
+	                            </div>
+	                            <div class="dropdown-menu-notif-more">
+	                            	<a href="#">See more</a>
+	                            </div>
+	                        </div>
+	                    </div>
+
+	                    <div class="dropdown dropdown-lang">
+	                    	<button class="dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+	                    		<span class="flag-icon flag-icon-us"></span>
+	                    	</button>
+	                    	<div class="dropdown-menu dropdown-menu-right">
+	                    		<div class="dropdown-menu-col">
+
+	                    			<a class="dropdown-item" href="#"><span class="flag-icon flag-icon-es"></span>Español</a>
+	                    		</div>
+	                    		<div class="dropdown-menu-col">
+	                    			<a class="dropdown-item current" href="#"><span class="flag-icon flag-icon-us"></span>English</a>
+	                    			
+	                    			
+	                    		</div>
+	                    	</div>
+	                    </div>
+
+	                    <div class="dropdown user-menu">
+	                    	<button class="dropdown-toggle" id="dd-user-menu" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+	                    		<img src="img/avatar-2-64.png" alt="">
+	                    	</button>
+	                    	<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dd-user-menu">
+	                    		<a class="dropdown-item" href="#"><span class="font-icon glyphicon glyphicon-user"></span>Profile</a>
+	                    		<a class="dropdown-item" href="#"><span class="font-icon glyphicon glyphicon-cog"></span>Settings</a>
+	                    		<a class="dropdown-item" href="#"><span class="font-icon glyphicon glyphicon-question-sign"></span>Help</a>
+	                    		<div class="dropdown-divider"></div>
+	                    		<a class="dropdown-item" href="#"><span class="font-icon glyphicon glyphicon-log-out"></span>Logout</a>
+	                    	</div>
+	                    </div>
+
+	                    <button type="button" class="burger-right">
+	                    	<i class="font-icon-menu-addl"></i>
+	                    </button>
+	                </div><!--.site-header-shown-->
+
+	                <div class="mobile-menu-right-overlay"></div>
+	                <div class="site-header-collapsed">
+	                	<div class="site-header-collapsed-in">
+
+	                	<!--	<div class="dropdown dropdown-typical">
+	                			<div class="dropdown-menu" aria-labelledby="dd-header-sales">
+	                				<a class="dropdown-item" href="#"><span class="font-icon font-icon-home"></span>Quant and Verbal</a>
+	                				<a class="dropdown-item" href="#"><span class="font-icon font-icon-cart"></span>Real Gmat Test</a>
+	                				<a class="dropdown-item" href="#"><span class="font-icon font-icon-speed"></span>Prep Official App</a>
+	                				<a class="dropdown-item" href="#"><span class="font-icon font-icon-users"></span>CATprer Test</a>
+	                				<a class="dropdown-item" href="#"><span class="font-icon font-icon-comments"></span>Third Party Test</a>
+	                			</div>
+	                		</div>
+	                	-->
+
+	                	<!--	<div class="dropdown dropdown-typical">
+	                			<a class="dropdown-toggle" id="dd-header-social" data-target="#" href="http://example.com" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+	                				<span class="font-icon font-icon-share"></span>
+	                				<span class="lbl">Social media</span>
+	                			</a>
+
+	                			<div class="dropdown-menu" aria-labelledby="dd-header-social">
+	                				<a class="dropdown-item" href="#"><span class="font-icon font-icon-home"></span>Quant and Verbal</a>
+	                				<a class="dropdown-item" href="#"><span class="font-icon font-icon-cart"></span>Real Gmat Test</a>
+	                				<a class="dropdown-item" href="#"><span class="font-icon font-icon-speed"></span>Prep Official App</a>
+	                				<a class="dropdown-item" href="#"><span class="font-icon font-icon-users"></span>CATprer Test</a>
+	                				<a class="dropdown-item" href="#"><span class="font-icon font-icon-comments"></span>Third Party Test</a>
+	                			</div>
+	                		</div>-->
+	                	<!--	<div class="dropdown dropdown-typical">
+	                			<a href="#" class="dropdown-toggle no-arr">
+	                				<span class="font-icon font-icon-page"></span>
+	                				<span class="lbl">Projects</span>
+	                				<span class="label label-pill label-danger">35</span>
+	                			</a>
+	                		</div>-->
+
+
+	                		<div class="help-dropdown">
+	                			<button type="button">
+	                				<i class="font-icon font-icon-help"></i>
+	                			</button>
+
+	                		<!--	<div class="help-dropdown-popup">
+	                				<div class="help-dropdown-popup-side">
+	                					<ul>
+	                						<li><a href="#">Getting Started</a></li>
+	                						<li><a href="#" class="active">Creating a new project</a></li>
+	                						<li><a href="#">Adding customers</a></li>
+	                						<li><a href="#">Settings</a></li>
+	                						<li><a href="#">Importing data</a></li>
+	                						<li><a href="#">Exporting data</a></li>
+	                					</ul>
+	                				</div>
+	                				<div class="help-dropdown-popup-cont">
+	                					<div class="help-dropdown-popup-cont-in">
+	                						<div class="jscroll">
+	                							<a href="#" class="help-dropdown-popup-item">
+	                								Lorem Ipsum is simply
+	                								<span class="describe">Lorem Ipsum has been the industry's standard dummy text </span>
+	                							</a>
+	                							<a href="#" class="help-dropdown-popup-item">
+	                								Contrary to popular belief
+	                								<span class="describe">Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC</span>
+	                							</a>
+	                							<a href="#" class="help-dropdown-popup-item">
+	                								The point of using Lorem Ipsum
+	                								<span class="describe">Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text</span>
+	                							</a>
+	                							<a href="#" class="help-dropdown-popup-item">
+	                								Lorem Ipsum
+	                								<span class="describe">There are many variations of passages of Lorem Ipsum available</span>
+	                							</a>
+	                							<a href="#" class="help-dropdown-popup-item">
+	                								Lorem Ipsum is simply
+	                								<span class="describe">Lorem Ipsum has been the industry's standard dummy text </span>
+	                							</a>
+	                							<a href="#" class="help-dropdown-popup-item">
+	                								Contrary to popular belief
+	                								<span class="describe">Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC</span>
+	                							</a>
+	                							<a href="#" class="help-dropdown-popup-item">
+	                								The point of using Lorem Ipsum
+	                								<span class="describe">Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text</span>
+	                							</a>
+	                							<a href="#" class="help-dropdown-popup-item">
+	                								Lorem Ipsum
+	                								<span class="describe">There are many variations of passages of Lorem Ipsum available</span>
+	                							</a>
+	                							<a href="#" class="help-dropdown-popup-item">
+	                								Lorem Ipsum is simply
+	                								<span class="describe">Lorem Ipsum has been the industry's standard dummy text </span>
+	                							</a>
+	                							<a href="#" class="help-dropdown-popup-item">
+	                								Contrary to popular belief
+	                								<span class="describe">Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC</span>
+	                							</a>
+	                							<a href="#" class="help-dropdown-popup-item">
+	                								The point of using Lorem Ipsum
+	                								<span class="describe">Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text</span>
+	                							</a>
+	                							<a href="#" class="help-dropdown-popup-item">
+	                								Lorem Ipsum
+	                								<span class="describe">There are many variations of passages of Lorem Ipsum available</span>
+	                							</a>
+	                						</div>
+	                					</div>
+	                				</div>
+	                			</div>
+	                		-->
+	                	</div><!--.help-dropdown-->
+
+	                	<div class="site-header-search-container">
+	                		<form class="site-header-search closed">
+	                			<input type="text" placeholder="Search"/>
+	                			<button type="submit">
+	                				<span class="font-icon-search"></span>
+	                			</button>
+	                		</form>
+	                	</div>
+	                </div><!--.site-header-collapsed-in-->
+	            </div><!--.site-header-collapsed-->
+	        </div><!--site-header-content-in-->
+	    </div><!--.site-header-content-->
+	</div><!--.container-fluid-->
+</header><!--.site-header-->
+
+<div class="mobile-menu-left-overlay"></div>
+
+<nav class="side-menu side-menu-compact">
+	<ul class="side-menu-list">
+		<li class="brown">
+			<a href="#">
+				<i class="font-icon font-icon-home"></i>
+				<span class="lbl">Overview</span>
+			</a>
+		</li>
+		<li class="green">
+			<a href="#">
+				<i class="font-icon font-icon-cart"></i>
+				<span class="lbl">Marketplace</span>
+			</a>
+		</li>
+		<li class="gold">
+			<a href="#">
+				<i class="font-icon font-icon-speed"></i>
+				<span class="lbl">Performance</span>
+			</a>
+		</li>
+		<li class="blue">
+			<a href="#">
+				<i class="font-icon font-icon-users"></i>
+				<span class="lbl">Community</span>
+			</a>
+		</li>
+		<li class="purple opened">
+			<a href="#">
+				<i class="font-icon font-icon-comments active"></i>
+				<span class="lbl">Messages</span>
+			</a>
+		</li>
+		<li class="orange-red">
+			<a href="#">
+				<i class="font-icon font-icon-help"></i>
+				<span class="lbl">Support</span>
+			</a>
+		</li>
+		<li class="grey">
+			<a href="#">
+				<i class="font-icon font-icon-dots"></i>
+				<span class="lbl">More</span>
+			</a>
+		</li>
+		<li class="blue-dirty">
+			<a href="#">
+				<i class="font-icon font-icon-edit"></i>
+				<span class="lbl">Forms</span>
+			</a>
+		</li>
+		<li class="coral">
+			<a href="#">
+				<i class="font-icon font-icon-chart"></i>
+				<span class="lbl">Reports</span>
+			</a>
+		</li>
+		<li class="pink-red">
+			<a href="#">
+				<i class="font-icon font-icon-zigzag"></i>
+				<span class="lbl">Activity</span>
+			</a>
+		</li>
+		<li class="gold">
+			<a href="#">
+				<i class="font-icon font-icon-tablet"></i>
+				<span class="lbl">Tables</span>
+			</a>
+		</li>
+		<li class="magenta">
+			<a href="#">
+				<i class="font-icon font-icon-widget"></i>
+				<span class="lbl">Widges</span>
+			</a>
+		</li>
+		<li class="pink">
+			<a href="#">
+				<i class="font-icon font-icon-map"></i>
+				<span class="lbl">Maps</span>
+			</a>
+		</li>
+		<li class="blue-darker">
+			<a href="#">
+				<i class="font-icon font-icon-chart-2"></i>
+				<span class="lbl">Charts</span>
+			</a>
+		</li>
+		<li class="grey">
+			<a href="#">
+				<i class="font-icon font-icon-doc"></i>
+				<span class="lbl">Documents</span>
+			</a>
+		</li>
+		<li class="blue-sky">
+			<a href="#">
+				<i class="font-icon font-icon-question"></i>
+				<span class="lbl">Help</span>
+			</a>
+		</li>
+		<li class="coral">
+			<a href="#">
+				<i class="font-icon font-icon-cogwheel"></i>
+				<span class="lbl">Settings</span>
+			</a>
+		</li>
+		<li class="magenta">
+			<a href="#">
+				<i class="font-icon font-icon-user"></i>
+				<span class="lbl">Profile</span>
+			</a>
+		</li>
+		<li class="blue-dirty">
+			<a href="#">
+				<i class="font-icon font-icon-notebook"></i>
+				<span class="lbl">Tasks</span>
+			</a>
+		</li>
+		<li class="aquamarine">
+			<a href="#">
+				<i class="font-icon font-icon-mail"></i>
+				<span class="lbl">Contact form</span>
+			</a>
+		</li>
+		<li class="pink">
+			<a href="#">
+				<i class="font-icon font-icon-users-group"></i>
+				<span class="lbl">Group</span>
+			</a>
+		</li>
+		<li class="gold">
+			<a href="#">
+				<i class="font-icon font-icon-picture-2"></i>
+				<span class="lbl">Gallery</span>
+			</a>
+		</li>
+		<li class="brown">
+			<a href="#">
+				<i class="font-icon font-icon-event"></i>
+				<span class="lbl">Event</span>
+			</a>
+		</li>
+		<li class="red">
+			<a href="#">
+				<i class="font-icon font-icon-case-2"></i>
+				<span class="lbl">Project</span>
+			</a>
+		</li>
+	</ul>
+</nav><!--.side-menu-->
+
+
+<div class="page-content">
+	<div class="container-fluid">
+
+
+		<div class="row base-datatable" >
+
+			<div class="col-md-12 title-datatable" >
+				<h2>List of Leads <a class="btn btn-inline btn-primary btn-sm ladda-button md-trigger" data-style="expand-right" data-size="m" data-modal="modal-1"><span class="ladda-label">Nuevo Lead</span><span class="ladda-spinner"></span></a></h2>
+				<div class="form-group">
+
+					<div class="col-md-2" style="text-align: left">
+						<select  id="statusSelect" class="bootstrap-select-status" tabindex="-98">
+						</select>
+					</div>
+					<div class="col-md-3">
+						<select  id="agentSelect" class="bootstrap-select-agent" tabindex="-98">
+						</select>
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+
+		<section class="card">
+			<div class="card-block">
+				<table id="example"   class="display table table-striped table-bordered" cellspacing="0" width="100%">
+					
+				</table>
+			</div>		
+		</section>
+	</div><!--.container-fluid-->
+
+</div><!--.page-content-->
+<div class="md-overlay"></div><!-- the overlay element -->
+
+<script src="js/lib/jquery/jquery.min.js"></script>
+<script src="js/lib/tether/tether.min.js"></script>
+<script src="js/lib/bootstrap/bootstrap.min.js"></script>
+<script src="js/lib/bootstrap-select/bootstrap-select.min.js"></script>
+<script src="js/lib/select2/select2.full.min.js"></script>
+
+<script src="js/plugins.js"></script>
+<script src="js/lib/datatables-net/datatables.min.js"></script>
+<!-- classie.js by @desandro: https://github.com/desandro/classie -->
+<script src="js/lib/modal/js/classie.js"></script>
+<script src="js/lib/modal/js/modalEffects.js"></script>
+<script src="js/lib/bootstrap-sweetalert/sweetalert.min.js"></script>
+
+<script>
+	var polyfilter_scriptpath = '/js/';
+</script>
+<script src="js/lib/js/cssParser.js"></script>
+<script src="js/lib/js/css-filters-polyfill.js"></script>
+
+<script type="text/javascript">
+	
+	function loadAgent(){
+
+
+		$.ajax({
+			method: "GET",
+			url: "http://neowork.co/API/config.php/1/event/agent/",
+			dataType: "json"
+		})
+		.done(function(result) {
+
+
+			$('#agentSelect').append("<option value=\"0\"  data-content=\"<span class=&quot;user-item&quot;>Assign Lead to Agent</span>\"></option>");
+
+
+			$.each(result, function(i, n) {
+
+
+				$('#agentSelect').append("<option value=\""+n.id+"\"  data-content=\"<span class=&quot;user-item&quot;><img src=&quot;"+n.avatar+"&quot;/>"+n.name+"</span>\">"+n.name+"</option>");
+
+
+
+			});
+
+
+
+			$('.bootstrap-select-agent').selectpicker({
+				style: '',
+				width: '100%',
+				size: 8
+			});
+
+
+		});
+
+	}
+
+
+	loadAgent();
+
+
+
+	function loadStatus(){
+
+
+		$.ajax({
+			method: "GET",
+			url: "http://neowork.co/API/config.php/1/status/",
+			dataType: "json"
+		})
+		.done(function(result) {
+
+			$('#statusSelect').append("<option value=\"all\"  data-content=\"All\">ALL</option>");
+
+			$.each(result, function(i, n) {
+
+				$('#statusSelect').append("<option value=\""+n.id+"\"  data-content=\""+n.name+"\">"+n.name+"</option>");
+
+
+			});
+
+
+			$('.bootstrap-select-status').selectpicker({
+				style: '',
+				width: '100%',
+				size: 8
+			});
+
+
+		});
+
+	}
+
+
+	loadStatus();
+
+
+
+	$( "#agentSelect").change(function() {
+
+
+
+	});
+
+
+
+	$( "#statusSelect").change(function() {
+		
+
+		var statu = $( "#statusSelect option:selected").html();
+
+		if(statu=="ALL"){
+			$("#example__ tbody tr ").show();
+		}else{
+			$("#example__ tbody tr ").hide();
+			$("#example__ tbody tr."+statu+"").show("slow");
+		}
+
+
+	});
+
+
+
+
+</script>
+
+<script src="js/app.js"></script>
+<script>
+
+	create_datatableLocation();
+	setApp("undefined");
+
+	function create_datatableLocation(){
+
+       // $('.loadTable').css("display" , "block");
+       $('#example table').remove();
+       $('#example #datatableLocations___filter').remove();
+       $('#example #datatableLocations___info').remove();
+       $("#example").append("<table id='example__' class='display datatable-example'><thead><tr>\
+       	<th class=' displayField_01  displayField01'><i class='fa fa-user'></i> <span class='DataTableHeader_01' ></span></th>\
+       	<th class=' displayField_02  displayField02'><i class='fa fa-envelope'></i> <span class='DataTableHeader_02' ></span></th>\
+       	<th class=' displayField_03  displayField02'><i class='fa fa-check'></i> <span class='DataTableHeader_03' ></span></th>\
+       	<th></th>\
+       </tr></thead><tbody class='tbodydata' ></tbody></table>");
+
+       $.ajax({
+       	method: "GET",
+       	url: "http://neowork.co/API/lead.php/1/all/",
+       	dataType: "json"
+       })
+       .done(function(result) {
+
+       	$('#example div').remove(card);
+       	$('#example__ td').remove();
+
+       	console.log(result);
+       	var row= "";
+       	var card= "";
+       	$.each(result, function(i, n) {
+
+       		//color = status_color(n.status);
+       		row = row+"<tr class=\" "+n.id+" \" >\
+       		<td class='DataTableField_01 displayField_01'>"+ n.type+" </td>\
+       		<td class='DataTableField_02 displayField_02'> "+ n.fromuser_fk.name+"</td>\
+       		<td class='DataTableField_03 displayField_03'> <i class=\"tag-color \" ></i> "+ n.id+"</td>\
+       		<td style='width:100px' class='mobile action-table'>\
+       			<a href=\"lead.html\" onclick=\"setApp("+ n.id+")\" class=\"btn-floating btn-small  transparent-icon \"><i class=\"material-icons blue-text \">edit</i></a>\
+       		</td></tr>";
+
+
+       	});
+
+       	$('#example__ tbody').append(row);
+
+       	datatableLocation_load();
+       	/* visibilidad de los campos en el DAtatable */
+       	$(' #example__ .displayField_01').css('display','table-cell');
+       	$(' #example__ .displayField_02').css('display','table-cell');
+       	$(' #example__ .displayField_03').css('display','table-cell');
+       	$('#example__').css("width","100% !important");
+       	$(".DataTableHeader_01 ").text("Full Name");
+       	$(".DataTableHeader_02 ").text('email');
+       	$(".DataTableHeader_03 ").text('mode');
+
+       	$('#example__').css("width","100% !important");
+
+       });
+
+
+   }
+
+
+   function status_color(status){
+
+   	if(status=="IN-PROGRESS"){
+   		return "orange";
+   	}
+
+   	if(status=="ONLY-ACCOUNT"){
+   		return "#9fc4e2";
+   	}
+
+   	if(status=="COMPLETED"){
+   		return "green";
+   	}
+
+   	if(status=="REFUSED"){
+   		return "red";
+   	}
+   }
+
+
+   function  datatableLocation_load(){
+   	datatablex = $('#example__').DataTable({
+   		paging: false,
+   		language: {
+   			searchPlaceholder: 'Search records',
+   			sSearch: '',
+   			sLengthMenu: 'Show _MENU_',
+   			sLength: 'dataTables_length',
+   			oPaginate: {
+   				sFirst: '<i class="material-icons">chevron_left</i>',
+   				sPrevious: '<i class="material-icons">chevron_left</i>',
+   				sNext: '<i class="material-icons">chevron_right</i>',
+   				sLast: '<i class="material-icons">chevron_right</i>' 
+   			}
+   		}
+   	});
+
+   	$('.dataTables_length select').addClass('browser-default');
+
+   }
+
+
+   function new_lead(){
+
+
+
+   	var parametros = {
+
+   		"firstname" : $("#firstname").val(),
+   		"lastname" : $("#lastname").val(),
+   		"email" : $("#email").val(),
+   		"phone" : $("#phone").val()
+   	};
+
+   	$.ajax({
+   		data:  parametros, 
+   		url:   'https://neowork.co/API/lead.php/1/new', 
+                type:  'post', //método de envio
+                beforeSend: function () {
+                	console.log("wait..");
+                },
+                success:  function (response) { 
+
+
+                	create_datatableLocation();
+
+                	
+                	
+                }
+            });
+   }
+
+
+   $("#submit-lead").click(function() {
+   	new_lead();
+   	swal({
+   		title: "Good job!",
+   		text: "You clicked the button!",
+   		type: "success",
+   		confirmButtonClass: "btn-success",
+   		confirmButtonText: "Success"
+   	});
+   	
+   	$("#modal-1").removeClass("md-show");
+
+   });
+
+
+
+
+
+</script>
+
+
+</body>
+</html>

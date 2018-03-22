@@ -1,0 +1,463 @@
+	<!DOCTYPE html>
+	<html>
+	<head lang="en">
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+		<meta http-equiv="x-ua-compatible" content="ie=edge">
+		<title></title>
+
+		<link href="img/favicon.144x144.png" rel="apple-touch-icon" type="image/png" sizes="144x144">
+		<link href="img/favicon.114x114.png" rel="apple-touch-icon" type="image/png" sizes="114x114">
+		<link href="img/favicon.72x72.png" rel="apple-touch-icon" type="image/png" sizes="72x72">
+		<link href="img/favicon.57x57.png" rel="apple-touch-icon" type="image/png">
+		<link href="img/favicon.png" rel="icon" type="image/png">
+		<link href="img/favicon.ico" rel="shortcut icon">
+
+		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+	<!--[if lt IE 9]>
+	<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+	<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
+	<link rel="stylesheet" href="css/lib/ion-range-slider/ion.rangeSlider.css">
+	<link rel="stylesheet" href="css/lib/ion-range-slider/ion.rangeSlider.skinHTML5.css">
+	<link rel="stylesheet" href="css/separate/elements/player.min.css">
+	<link rel="stylesheet" href="css/separate/vendor/fancybox.min.css">
+	<link rel="stylesheet" href="css/separate/pages/profile-2.min.css">
+	<link rel="stylesheet" href="css/lib/font-awesome/font-awesome.min.css">
+	<link rel="stylesheet" href="css/lib/bootstrap/bootstrap.min.css">
+	<link rel="stylesheet" href="js/lib/dropzone/dropzone.css">
+	<link rel="stylesheet" href="css/lib/bootstrap-sweetalert/sweetalert.css">
+	<link rel="stylesheet" href="css/separate/vendor/sweet-alert-animations.min.css">
+	<link rel="stylesheet" type="text/css" href="js/lib/modal/css/component.css" />	
+	<link rel="stylesheet" href="css/main.css">
+	<link rel="stylesheet" href="css/style.css">
+</head>
+<body class="dark-theme dark-theme-green">
+
+	<div class="md-modal md-effect-1" id="modal-1">
+		<div class="md-content">
+			<h3>Modal Dialog</h3>
+			<div>
+				
+				<form   id="my-awesome-dropzone" action="upload/upload-avatar.php" class="dropzone" method="post" enctype="multipart/form-data">
+					<div class="fallback">
+						<input name="userfile" type="userfile"  />
+					</div>
+					<input name="id" id="id" type="hidden" value="" />
+
+				</form>
+
+				<button class="md-close">Close me!</button>
+			</div>
+		</div>
+	</div>
+
+
+
+	<header class="site-header">
+		<div class="container-fluid">
+
+			<a href="#" class="site-logo">
+				<img class="hidden-md-down" src="img/logo-2.png" alt="">
+				<img class="hidden-lg-up" src="img/logo-2-mob.png" alt="">
+			</a>
+
+			<button id="show-hide-sidebar-toggle" class="show-hide-sidebar">
+				<span>toggle menu</span>
+			</button>
+
+			<button class="hamburger hamburger--htla">
+				<span>toggle menu</span>
+			</button>
+			<div class="site-header-content">
+				<div class="site-header-content-in">
+					<div class="site-header-shown">
+
+						<a class="btn btn-nav btn-inline btn-success-outline go_principal" style="background: transparent;" >
+							Volver al Inicio
+						</a>
+
+						<div class="dropdown dropdown-notification notif">
+							<a href="#"
+							class="header-alarm dropdown-toggle active"
+							id="dd-notification"
+							data-toggle="dropdown"
+							aria-haspopup="true"
+							aria-expanded="false">
+							<i class="font-icon-alarm"></i>
+						</a>
+						<div class="dropdown-menu dropdown-menu-right dropdown-menu-notif" aria-labelledby="dd-notification">
+							<div class="dropdown-menu-notif-header">
+								Notifications
+								<span class="label label-pill label-danger">4</span>
+							</div>
+							<div class="dropdown-menu-notif-list">
+								<div class="dropdown-menu-notif-item">
+									<div class="photo">
+										<img src="img/photo-64-1.jpg" alt="">
+									</div>
+									<div class="dot"></div>
+									<a href="#">Morgan</a> was bothering about something
+									<div class="color-blue-grey-lighter">7 hours ago</div>
+								</div>
+								<div class="dropdown-menu-notif-item">
+									<div class="photo">
+										<img src="img/photo-64-2.jpg" alt="">
+									</div>
+									<div class="dot"></div>
+									<a href="#">Lioneli</a> had commented on this <a href="#">Super Important Thing</a>
+									<div class="color-blue-grey-lighter">7 hours ago</div>
+								</div>
+								<div class="dropdown-menu-notif-item">
+									<div class="photo">
+										<img src="img/photo-64-3.jpg" alt="">
+									</div>
+									<div class="dot"></div>
+									<a href="#">Xavier</a> had commented on the <a href="#">Movie title</a>
+									<div class="color-blue-grey-lighter">7 hours ago</div>
+								</div>
+								<div class="dropdown-menu-notif-item">
+									<div class="photo">
+										<img src="img/photo-64-4.jpg" alt="">
+									</div>
+									<a href="#">Lionely</a> wants to go to <a href="#">Cinema</a> with you to see <a href="#">This Movie</a>
+									<div class="color-blue-grey-lighter">7 hours ago</div>
+								</div>
+							</div>
+							<div class="dropdown-menu-notif-more">
+								<a href="#">See more</a>
+							</div>
+						</div>
+					</div>
+
+
+
+
+
+					<div class="dropdown user-menu">
+						<button class="dropdown-toggle" id="dd-user-menu" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							<img src="img/avatar-2-64.png" alt="">
+						</button>
+						<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dd-user-menu">
+							<a class="dropdown-item" href="#"><span class="font-icon glyphicon glyphicon-user"></span>Profile</a>
+							<a class="dropdown-item" href="#"><span class="font-icon glyphicon glyphicon-cog"></span>Settings</a>
+							<a class="dropdown-item" href="#"><span class="font-icon glyphicon glyphicon-question-sign"></span>Help</a>
+							<div class="dropdown-divider"></div>
+							<a class="dropdown-item" href="#"><span class="font-icon glyphicon glyphicon-log-out"></span>Logout</a>
+						</div>
+					</div>
+
+					<button type="button" class="burger-right">
+						<i class="font-icon-menu-addl"></i>
+					</button>
+				</div><!--.site-header-shown-->
+
+				<div class="mobile-menu-right-overlay"></div>
+				<div class="site-header-collapsed">
+					<div class="site-header-collapsed-in">
+						<div class="dropdown dropdown-typical">
+							<div class="dropdown-menu" aria-labelledby="dd-header-sales">
+								<a class="dropdown-item" href="#"><span class="font-icon font-icon-home"></span>Quant and Verbal</a>
+								<a class="dropdown-item" href="#"><span class="font-icon font-icon-cart"></span>Real Gmat Test</a>
+								<a class="dropdown-item" href="#"><span class="font-icon font-icon-speed"></span>Prep Official App</a>
+								<a class="dropdown-item" href="#"><span class="font-icon font-icon-users"></span>CATprer Test</a>
+								<a class="dropdown-item" href="#"><span class="font-icon font-icon-comments"></span>Third Party Test</a>
+							</div>
+						</div>
+
+
+
+
+
+
+					</div><!--.site-header-collapsed-in-->
+				</div><!--.site-header-collapsed-->
+			</div><!--site-header-content-in-->
+		</div><!--.site-header-content-->
+	</div><!--.container-fluid-->
+</header><!--.site-header-->
+
+<div class="page-content">
+
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-xl-3 col-lg-4">
+				<aside class="profile-side">
+
+
+
+
+
+					<section class="box-typical profile-side-user" style="margin-top:245px">
+						<button  type="button" class="avatar-preview avatar-preview-128">
+							<img class="img-view" src="img/avatar-1-256.png" alt=""/>
+							<span class="update   md-trigger" data-modal="modal-1" >
+								<i class="font-icon font-icon-picture-double"></i>
+								Update photo
+							</span>
+						</button>
+						<div class="bottom-txt " style="text-transform: uppercase;" ><span class="name"></span> | <span class="role"></span></div>
+					</section>
+
+					<section class="box-typical profile-side-stat">
+						<div class="tbl">
+							<div class="tbl-row">
+								<div class="tbl-cell">
+									<span class="number">9854</span>
+									Leads Asignados
+								</div>
+								<div class="tbl-cell">
+									<span class="number">112</span>
+									Leads Exitosos
+								</div>
+							</div>
+						</div>
+					</section>
+
+
+					<section class="box-typical">
+						<header class="box-typical-header-sm bordered">Info</header>
+						<div class="box-typical-inner">
+							<p class="line-with-icon">
+								<i class="font-icon font-icon-pin-2"></i>
+								<span class="name"></span>
+							</p>
+							<p class="line-with-icon">
+								<i class="font-icon font-icon-users-two"></i>
+								<span class="role"></span>
+							</p>
+							<p class="line-with-icon">
+								<i class="font-icon font-icon-case-3"></i>
+								<span class="email"></span>
+							</p>
+							<p class="line-with-icon">
+								<i class="font-icon font-icon-learn"></i>
+								<span class="phone"></span>
+							</p>
+							<p class="line-with-icon">
+								<i class="font-icon font-icon-github"></i>
+								<span class="phone2"></span>
+							</p>
+
+						</div>
+					</section>
+
+
+				</aside><!--.profile-side-->
+			</div>
+
+			<div class="col-xl-9 col-lg-8">
+				<section class="tabs-section">
+					<div class="tabs-section-nav tabs-section-nav-left">
+						<ul class="nav" role="tablist">
+
+							<li class="nav-item">
+								<a class="nav-link active" href="#tabs-2-tab-4" role="tab" data-toggle="tab">
+									<span class="nav-link-in">Settings</span>
+								</a>
+							</li>
+
+						</ul>
+					</div><!--.tabs-section-nav-->
+
+					<div class="tab-content no-styled profile-tabs">
+
+
+
+						<div role="tabpanel" class="tab-pane active" id="tabs-2-tab-4">
+							<section class="box-typical profile-settings">
+								<section class="box-typical-section">
+
+
+									<div class="form-group row">
+
+
+										<div class="col-xl-2">
+											<label class="form-label">Name</label>
+										</div>
+										<div class="col-xl-4">
+											<input id="name2" class="form-control campo name " type="text" value=""/>
+										</div>
+
+
+										<div class="col-xl-2">
+											<label class="form-label">Email</label>
+										</div>
+										<div class="col-xl-4">
+											<input id="email" class="form-control campo email" type="text" value=""/>
+										</div>
+
+									</div>
+
+									<div class="form-group row">
+
+
+										<div class="col-xl-2">
+											<label class="form-label">Role</label>
+										</div>
+										<div class="col-xl-4">
+											<select id="roleSelect" class="form-control 	">
+												<option value="ADMIN">ADMIN</option>
+												<option value="AGENT">AGENT</option>
+											</select>									</div>
+
+
+											<div class="col-xl-2">
+												<label class="form-label">Genre</label>
+											</div>
+											<div class="col-xl-4">
+
+												<select id="genreSelect" class="form-control ">
+													<option value="MASCULINO">MASCULINO</option>
+													<option value="FEMENINO">FEMENINO</option>
+													<option value="NOESPECIFICA">NO-ESPECIFICA</option>
+												</select>
+											</div>
+
+										</div>
+
+
+
+										<div class="form-group row">
+											
+
+											<div class="col-xl-2">
+												<label class="form-label">
+													<i class="font-icon font-icon-pin-2"></i>
+													Phone #1
+												</label>
+											</div>
+											<div class="col-xl-4">
+												<input id="phone" class="form-control phone mask_phone" type="text" value=""/>
+											</div>
+
+
+											<div class="col-xl-2">
+												<label class="form-label">
+													<i class="font-icon font-icon-users-two"></i>
+													Phone #2
+												</label>
+											</div>
+											<div class="col-xl-4">
+												<input id="phone2" class="form-control phone2 mask_phone" type="text" value="Group1, Group2"/>
+											</div>
+
+
+
+										</div>
+
+
+										<div class="form-group row">
+											<div class="col-xl-2">
+												<label class="form-label">
+													<i class="font-icon font-icon-case-3"></i>
+													Address
+												</label>
+											</div>
+											<div class="col-xl-4">
+												<input id="address" class="form-control address" type="text" value="Symfony, PHP, JavaScript, Java, Android, SQL, OOP, OOD"/>
+											</div>
+
+											<div class="col-xl-2">
+												<label class="form-label">
+													<i class="font-icon font-icon-learn"></i>
+													Education
+												</label>
+											</div>
+											<div class="col-xl-4">
+												<input id="education" class="form-control education" type="text" value="VSU, Compiter Science, Master"/>
+											</div>
+										</div>
+
+									</section>
+
+
+									<section class="box-typical-section profile-settings-btns">
+										<button   onclick="updateProfile()" class="btn btn-success">Save Changes</button>
+									</section>
+								</section>
+							</div><!--.tab-pane-->
+
+							<div role="tabpanel" class="tab-pane " id="tabs-2-tab-5">
+								<section class="box-typical profile-settings">
+
+									<section class="box-typical-section">
+
+										<div class="form-group row">
+											<div class="col-xl-2">
+												<label class="form-label">
+													<i class="font-icon font-icon-case-3"></i>
+													Password
+												</label>
+											</div>
+											<div class="col-xl-4">
+												<input id="password" class="form-control address" type="text" value=""/>
+											</div>
+										</div>
+
+
+									</section>
+
+									<section class="box-typical-section profile-settings-btns">
+										<button   onclick="updatePassword()" class="btn btn-success">Save password</button>
+									</section>
+								</section>
+							</div><!--.tab-pane-->
+
+
+
+						</div><!--.tab-content-->
+
+
+
+
+					</div><!--.tab-content-->
+
+				</section><!--.tabs-section-->
+			</div>
+		</div><!--.row-->
+	</div><!--.container-fluid-->
+</div><!--.page-content-->
+
+<div class="loadajax"><p style="text-align: center"> <img src="img/loader.gif"></p></div>
+
+<script src="js/lib/jquery/jquery.min.js"></script>
+<script src="js/lib/tether/tether.min.js"></script>
+<script src="js/lib/bootstrap/bootstrap.min.js"></script>
+<script src="js/lib/dropzone/dropzone.js"></script>
+<script src="js/lib/input-mask/jquery.mask.min.js"></script>
+<script src="js/lib/input-mask/input-mask-init.js"></script>
+<script src="js/plugins.js"></script>
+<script src="js/lib/salvattore/salvattore.min.js"></script>
+<script src="js/lib/ion-range-slider/ion.rangeSlider.js"></script>
+<script src="js/lib/fancybox/jquery.fancybox.pack.js"></script>
+<script src="js/lib/modal/js/classie.js"></script>
+<script src="js/lib/modal/js/modalEffects.js"></script>
+<script src="js/lib/bootstrap-sweetalert/sweetalert.min.js"></script>
+<script>
+	var polyfilter_scriptpath = '/js/';
+</script>
+<script src="js/lib/js/cssParser.js"></script>
+<script src="js/lib/js/css-filters-polyfill.js"></script>
+
+<script src="js/data.js"></script>
+<script src="js/app.js"></script>
+<script src="js/view.js"></script>
+<script src="js/agent.js"></script>
+
+<script>
+	
+	$(document).ready(function(){
+
+		inicializacion();
+		uploadAvatarProfile();
+		loadProfile();
+
+	});
+
+
+</script>
+
+
+</body>
+</html>

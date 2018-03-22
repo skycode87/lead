@@ -1,0 +1,120 @@
+
+
+
+.loadajax {
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	visibility: hidden;
+	top: 0;
+	left: 0;
+	z-index: 1000;
+	opacity: 0;
+	background: rgba(240, 240, 240, 0.65);
+	-webkit-transition: all 0.3s;
+	-moz-transition: all 0.3s;
+	transition: all 0.3s;
+
+}
+
+.loadajax img{
+	margin: auto;
+	padding-top: 10%;
+}
+
+.visible{
+	opacity: 1;
+	visibility: visible;
+}
+
+
+.novisible{
+	opacity: 0;
+	visibility: hidden;
+}
+
+.task button{
+	margin-bottom: 10px !important;
+}
+
+.datatable table tbody i{
+	font-size: 1.5em;
+		text-decoration: none;
+		color:#444;
+		margin-right: 10px;
+}
+
+.datatable table  tbody a{
+	text-decoration: none;
+	    border-bottom: none;
+	    color:#2d2d2d;
+}
+
+.datatable table tbody i:hover{
+ transform: scale(1.1);
+ color:#000;
+}
+
+ .datatable table .code{
+    color: #fff;
+    text-decoration: none;
+    cursor: pointer;
+    outline: 0!important;
+    border: none;
+    background: #4d4d4d;
+    padding: 5px 10px;
+    border-radius: 3px;
+}
+
+
+ .datatable table .code:hover{
+background: #f07064 !important;
+font-weight:bold;
+ transform: scale(1.1);
+
+}
+
+
+
+
+.background001{
+	background: #f6f6f6 !important;
+}
+
+.background002{
+	background: #f6f6f6 !important !important;
+}
+
+/* boton y cabecera tabla */
+.background003{
+	
+}
+
+
+.btn-success{
+	background: #1eb5ac !important;
+	border:  #1eb5ac !important;
+}
+
+.editar-icon{
+color: #4d4d4d !important;
+}
+
+.basura-icon{
+color: #4d4d4d !important;
+}
+
+
+.editar-icon:hover{
+color: #f07064 !important;
+}
+
+.basura-icon:hover{
+color: #f07064 !important;
+}
+
+.dz-message span{
+	color:#4d4d4d;
+	font-weight:bold;
+
+}

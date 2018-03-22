@@ -1,0 +1,10 @@
+{
+  "inicio":"sign-in.html",
+  "principal":"inicio.html",
+  "client":"contacto.html",
+  "user":"agente.html",
+  "users":"agentes.html",
+  "password":"password.html",
+  "profile":"perfil.html",
+  "title-system":"Capital al Instante"
+}

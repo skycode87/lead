@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<meta name="robots" content="nofollow" />
+
+	<title></title>
+
+<!--
+	<link href="img/favicon.144x144.png" rel="apple-touch-icon" type="image/png" sizes="144x144">
+	<link href="img/favicon.114x114.png" rel="apple-touch-icon" type="image/png" sizes="114x114">
+	<link href="img/favicon.72x72.png" rel="apple-touch-icon" type="image/png" sizes="72x72">
+	<link href="img/favicon.57x57.png" rel="apple-touch-icon" type="image/png">
+	<link href="img/favicon.png" rel="icon" type="image/png">
+	<link href="img/favicon.ico" rel="shortcut icon">
+	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+	<!--[if lt IE 9]>
+	<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+	<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
+	<link rel="stylesheet" href="css/lib/datatables-net/datatables.min.css">
+	<link rel="stylesheet" href="css/separate/vendor/datatables-net.min.css">
+	<link rel="stylesheet" href="css/separate/pages/widgets.min.css">
+	<link rel="stylesheet" href="css/lib/bootstrap-sweetalert/sweetalert.css">
+	<link rel="stylesheet" href="css/separate/vendor/sweet-alert-animations.min.css">
+	<link rel="stylesheet" href="css/lib/font-awesome/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="js/lib/modal/css/component.css" />	
+	<link rel="stylesheet" href="css/lib/bootstrap/bootstrap.min.css">
+	<link rel="stylesheet" href="css/separate/vendor/bootstrap-select/bootstrap-select.min.css">
+	<link rel="stylesheet" href="css/separate/vendor/select2.min.css">
+	<link href="css/lib/charts-c3js/c3.min.css" rel="stylesheet" type="text/css">
+
+	<link rel="stylesheet" href="css/main.css">
+	<link rel="stylesheet" href="css/style.css">
+
+	<style>
+
+		table.dataTable{
+			width: 100% !important;
+		}
+
+		.with-side-menu-addl-full .page-content {
+			padding-left: 100px;
+		}
+
+		table.dataTable .tag-color {
+			display: block;
+			width: 16px;
+			height: 16px;
+			background: #000;
+			-webkit-border-radius: 2px;
+			border-radius: 2px;
+			top: 5px;
+			float: left;
+			margin-right: 10px;
+		}
+
+		table.dataTable .tag-color.orange {
+			background-color: #ff7721;
+		}
+
+
+		.table td .miniavatar{
+			display: inline-block;
+			width: 50px;
+			height: 50px;
+			-webkit-border-radius: 50%;
+			border-radius: 50%;
+			margin-right: 10px;
+		}
+
+
+		.title-datatable{
+			margin-bottom: 10px;
+			position: relative;
+			top: 65px;
+			left: 20px;
+			margin-bottom: 10px;
+		}
+
+		.base-datatable{
+			margin-top: -70px;
+		}
+
+		.base-datatable h2{
+			position: relative;
+			top: -10px;
+			margin-top: -70px !important;
+		}
+
+
+		article.statistic-box:hover{
+			transform: scale(1.04);
+			cursor: pointer !important;
+
+
+		} 
+
+		.page-content-header:before {
+			background: #f6f6f6 !important !important;
+			left:0px;
+		}
+
+		.page-content-header:after {
+			background: #f6f6f6 !important;
+			right: 0px;
+		}
+
+		.page-content-header .tbl-cell {
+			padding: 10px 0 10px;
+			position: relative;
+			top: -5px;
+
+		}
+
+		.page-content-header  h3{
+			font-weight: 200;
+			color: #5d5d5d;
+			font-size: 2em;
+		}
+
+		.page-content-header  h3 span{
+			color: darkred;
+			font-size: .6em;
+		}
+
+		table.dataTable {
+			border-collapse: unset;
+		}
+
+		.table thead th{
+			background: #eeeeee !important;
+		}
+
+
+
+		.statistic-box>div {
+			height: 100px;
+		}
+
+		.statistic-box .number {
+			font-size: 2.5rem;
+			line-height: 1;
+			padding: 4px 0 0;
+			margin-bottom: 9px;
+			font-weight: bold;
+		}
+
+		.dataTables_length{
+			display: none;
+		}
+
+		.title-datatable select{
+			display: none;
+		}
+
+		.statistic-box .caption {
+			min-height: 20px;
+			margin-top: 7px;
+		}
+
+
+
+		.statistic-box.box2{
+			height: 50px;
+			padding: 10px;
+			font-size: 2rem;
+		}
+
+
+		.link10{
+			border-bottom: 1px solid red;
+			padding-bottom: 5px;
+		}
+
+
+	</style>
+
+</head>
+
+<body class="with-side-menu-addl-full with-side-menu-compact dark-theme dark-theme-green background001">
+
+
+	<div class="md-modal md-effect-1" id="modal-1" >
+		<div class="md-content" style="background: #1eb5ac!important; border: #1eb5ac;">
+			<h3 >Nuevo Contacto</h3>
+			<div class="box-typical box-typical-padding">
+				
+				<form id="form-new-lead">
+					<span style="color:red; font-size: 14px;" class="alertaModal"></span>
+					<div class="row">
+						<div class="col-lg-6">
+							<fieldset class="form-group">
+								<label class="form-label semibold" for="exampleInput" style="color:#000">Nombre</label>
+								<input type="text" class="form-control maxlength-simple" id="firstname" placeholder="Primer Nombre" maxlength="20">
+							</fieldset>
+						</div>
+						<div class="col-lg-6">
+							<fieldset class="form-group">
+								<label class="form-label semibold" for="exampleInputEmail1" style="color:#000" >Apellido</label>
+								<input type="email" class="form-control" id="lastname" placeholder="Primer Apellido" >
+							</fieldset>
+						</div>
+						<div class="col-lg-6">
+							<fieldset class="form-group">
+								<label class="form-label semibold" for="exampleInputPassword1" style="color:#000">Correo Electrónico</label>
+								<input type="text" class="form-control" id="email" placeholder="aaa@aaa.aaa">
+							</fieldset>
+						</div>
+
+						<div class="col-lg-6">
+							<fieldset class="form-group">
+								<label class="form-label semibold" for="exampleInputPassword1" style="color:#000">Teléfono Movil</label>
+								<input type="text" class="form-control mask_phone" id="phone" placeholder="Enter Phone">
+							</fieldset>
+						</div>
+
+						<div class="col-lg-12" style="text-align: center;">
+							<fieldset class="form-group">
+								<button type="button" id="submit-lead" class="btn btn-inline btn-success btn-lg">Continuar</button>
+								<button type="button"   class="btn btn-inline btn-danger md-close btn-lg">Cancelar</button>
+							</fieldset>
+						</div>
+
+
+
+					</div>
+				</form>
+
+				
+			</div>
+		</div>
+	</div>
+
+
+	<header class="site-header" >
+		<div class="container-fluid">
+
+			<a href="#" class="site-logo">
+				<img class="hidden-md-down" src="img/logo-2.png" alt="">
+			</a>
+
+			<button id="show-hide-sidebar-toggle" class="show-hide-sidebar">
+				<span>toggle menu</span>
+			</button>
+
+			<button class="hamburger hamburger--htla">
+				<span>toggle menu</span>
+			</button>
+			<div class="site-header-content">
+				<div class="site-header-content-in">
+					<div class="site-header-shown">
+						<div class="dropdown dropdown-notification notif">
+							<a href="#" class="header-alarm dropdown-toggle active" id="dd-notification" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								<i class="font-icon-alarm"></i>
+							</a>
+							<div class="dropdown-menu dropdown-menu-right dropdown-menu-notif" aria-labelledby="dd-notification">
+								<div class="dropdown-menu-notif-header">
+									Notificaciones
+									<span class="label label-pill label-danger">4</span>
+								</div>
+								<div class="dropdown-menu-notif-list">
+									<div class="dropdown-menu-notif-item">
+										<div class="photo">
+											<img src="img/photo-64-1.jpg" alt="">
+										</div>
+										<div class="dot"></div>
+										<a href="#">Morgan</a> was bothering about something
+										<div class="color-blue-grey-lighter">7 hours ago</div>
+									</div>
+									<div class="dropdown-menu-notif-item">
+										<div class="photo">
+											<img src="img/photo-64-2.jpg" alt="">
+										</div>
+										<div class="dot"></div>
+										<a href="#">Lioneli</a> had commented on this <a href="#">Super Important Thing</a>
+										<div class="color-blue-grey-lighter">7 hours ago</div>
+									</div>
+									<div class="dropdown-menu-notif-item">
+										<div class="photo">
+											<img src="img/photo-64-3.jpg" alt="">
+										</div>
+										<div class="dot"></div>
+										<a href="#">Xavier</a> had commented on the <a href="#">Movie title</a>
+										<div class="color-blue-grey-lighter">7 hours ago</div>
+									</div>
+									<div class="dropdown-menu-notif-item">
+										<div class="photo">
+											<img src="img/photo-64-4.jpg" alt="">
+										</div>
+										<a href="#">Lionely</a> wants to go to <a href="#">Cinema</a> with you to see <a href="#">This Movie</a>
+										<div class="color-blue-grey-lighter">7 hours ago</div>
+									</div>
+								</div>
+								<div class="dropdown-menu-notif-more">
+									<a href="#">Ver más</a>
+								</div>
+							</div>
+						</div>
+
+					<!--	<div class="dropdown dropdown-notification messages">
+							<a href="#" class="header-alarm dropdown-toggle active" id="dd-messages" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								<i class="font-icon-mail"></i>
+							</a>
+							<div class="dropdown-menu dropdown-menu-right dropdown-menu-messages" aria-labelledby="dd-messages">
+								<div class="dropdown-menu-messages-header">
+									<ul class="nav" role="tablist">
+										<li class="nav-item">
+											<a class="nav-link active" data-toggle="tab" href="#tab-incoming" role="tab">
+												Inbox
+												<span class="label label-pill label-danger">8</span>
+											</a>
+										</li>
+										<li class="nav-item">
+											<a class="nav-link" data-toggle="tab" href="#tab-outgoing" role="tab">Outbox</a>
+										</li>
+									</ul>
+	                               <button type="button" class="create">
+	                                    <i class="font-icon font-icon-pen-square"></i>
+	                                </button>
+	                            </div>
+	                            <div class="tab-content">
+	                            	<div class="tab-pane active" id="tab-incoming" role="tabpanel">
+	                            		<div class="dropdown-menu-messages-list">
+	                            			<a href="#" class="mess-item">
+	                            				<span class="avatar-preview avatar-preview-32"><img src="img/photo-64-2.jpg" alt=""></span>
+	                            				<span class="mess-item-name">Tim Collins</span>
+	                            				<span class="mess-item-txt">Morgan was bothering about something!</span>
+	                            			</a>
+	                            			<a href="#" class="mess-item">
+	                            				<span class="avatar-preview avatar-preview-32"><img src="img/avatar-2-64.png" alt=""></span>
+	                            				<span class="mess-item-name">Christian Burton</span>
+	                            				<span class="mess-item-txt">Morgan was bothering about something! Morgan was bothering about something.</span>
+	                            			</a>
+	                            			<a href="#" class="mess-item">
+	                            				<span class="avatar-preview avatar-preview-32"><img src="img/photo-64-2.jpg" alt=""></span>
+	                            				<span class="mess-item-name">Tim Collins</span>
+	                            				<span class="mess-item-txt">Morgan was bothering about something!</span>
+	                            			</a>
+	                            			<a href="#" class="mess-item">
+	                            				<span class="avatar-preview avatar-preview-32"><img src="img/avatar-2-64.png" alt=""></span>
+	                            				<span class="mess-item-name">Christian Burton</span>
+	                            				<span class="mess-item-txt">Morgan was bothering about something...</span>
+	                            			</a>
+	                            		</div>
+	                            	</div>
+	                            	<div class="tab-pane" id="tab-outgoing" role="tabpanel">
+	                            		<div class="dropdown-menu-messages-list">
+	                            			<a href="#" class="mess-item">
+	                            				<span class="avatar-preview avatar-preview-32"><img src="img/avatar-2-64.png" alt=""></span>
+	                            				<span class="mess-item-name">Christian Burton</span>
+	                            				<span class="mess-item-txt">Morgan was bothering about something! Morgan was bothering about something...</span>
+	                            			</a>
+	                            			<a href="#" class="mess-item">
+	                            				<span class="avatar-preview avatar-preview-32"><img src="img/photo-64-2.jpg" alt=""></span>
+	                            				<span class="mess-item-name">Tim Collins</span>
+	                            				<span class="mess-item-txt">Morgan was bothering about something! Morgan was bothering about something.</span>
+	                            			</a>
+	                            			<a href="#" class="mess-item">
+	                            				<span class="avatar-preview avatar-preview-32"><img src="img/avatar-2-64.png" alt=""></span>
+	                            				<span class="mess-item-name">Christian Burtons</span>
+	                            				<span class="mess-item-txt">Morgan was bothering about something!</span>
+	                            			</a>
+	                            			<a href="#" class="mess-item">
+	                            				<span class="avatar-preview avatar-preview-32"><img src="img/photo-64-2.jpg" alt=""></span>
+	                            				<span class="mess-item-name">Tim Collins</span>
+	                            				<span class="mess-item-txt">Morgan was bothering about something!</span>
+	                            			</a>
+	                            		</div>
+	                            	</div>
+	                            </div>
+	                            <div class="dropdown-menu-notif-more">
+	                            	<a href="#">See more</a>
+	                            </div>
+	                        </div>
+	                    </div> -->
+
+	               <!--     <div class="dropdown dropdown-lang">
+	                    	<button class="dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+	                    		<span class="flag-icon flag-icon-us"></span>
+	                    	</button>
+	                    	<div class="dropdown-menu dropdown-menu-right">
+	                    		<div class="dropdown-menu-col">
+	                    			<a class="dropdown-item" href="#"><span class="flag-icon flag-icon-ru"></span>Русский</a>
+	                    			<a class="dropdown-item" href="#"><span class="flag-icon flag-icon-de"></span>Deutsch</a>
+	                    			<a class="dropdown-item" href="#"><span class="flag-icon flag-icon-it"></span>Italiano</a>
+	                    			<a class="dropdown-item" href="#"><span class="flag-icon flag-icon-es"></span>Español</a>
+	                    			<a class="dropdown-item" href="#"><span class="flag-icon flag-icon-pl"></span>Polski</a>
+	                    			<a class="dropdown-item" href="#"><span class="flag-icon flag-icon-li"></span>Lietuviu</a>
+	                    		</div>
+	                    		<div class="dropdown-menu-col">
+	                    			<a class="dropdown-item current" href="#"><span class="flag-icon flag-icon-us"></span>English</a>
+	                    			<a class="dropdown-item" href="#"><span class="flag-icon flag-icon-fr"></span>Français</a>
+	                    			<a class="dropdown-item" href="#"><span class="flag-icon flag-icon-by"></span>Беларускi</a>
+	                    			<a class="dropdown-item" href="#"><span class="flag-icon flag-icon-ua"></span>Українська</a>
+	                    			<a class="dropdown-item" href="#"><span class="flag-icon flag-icon-cz"></span>Česky</a>
+	                    			<a class="dropdown-item" href="#"><span class="flag-icon flag-icon-ch"></span>中國</a>
+	                    		</div>
+	                    	</div>
+	                    </div>-->
+
+	                    <div class="dropdown user-menu">
+	                    	
+	                    </div>
+
+	                    <button type="button" class="burger-right">
+	                    	<i class="font-icon-menu-addl"></i>
+	                    </button>
+	                </div><!--.site-header-shown-->
+
+	                <div class="mobile-menu-right-overlay"></div>
+	                
+	            </div><!--site-header-content-in-->
+	        </div><!--.site-header-content-->
+	    </div><!--.container-fluid-->
+	</header>
+
+
+	<div class="mobile-menu-left-overlay"></div>
+
+	<nav class="side-menu side-menu-compact">
+		<!--.ver view.js -->
+	</nav>
+
+
+
+
+
+
+
+	<div class="page-content">
+		<div class="container-fluid">
+
+
+			<div class="row" style="    padding-bottom:20px !important;">
+				<div class="col-xl-12">
+					<div class="row">
+						<div class="col-sm-2">
+							<article class="statistic-box " style="background:#82BAEA; cursor:pointer;"  onclick="statusStatFilter('prospectos')">
+								<div>
+									<div class="number "><span id="cuadro01_cantidad">0</span></div>
+									<div class="caption"><div>Prospectos</div></div>
+								</div>
+							</article>
+						</div><!--.col-->
+						<div class="col-sm-2">
+							<article class="statistic-box purple" style="background:#7D8CBE;  cursor:pointer;"  onclick="statusStatFilter('Aplicantes')">
+								<div>
+									<div class="number"><span id="cuadro02_cantidad">0</span></div>
+									<div class="caption"><div>Aplicantes</div></div>
+								</div>
+							</article>
+						</div><!--.col-->
+
+						<div class="col-sm-2">
+							<article class="statistic-box purple" style="background:#c0f;  cursor:pointer;"  onclick="statusStatFilter('Evaluados')">
+								<div>
+									<div class="number"><span id="cuadro05_cantidad">0</span></div>
+									<div class="caption"><div>En Espera <br> de Aprobación</div></div>
+								</div>
+							</article>
+						</div><!--.col-->
+
+						<div class="col-sm-2">
+							<article class="statistic-box " style="cursor:pointer; background:#F5C035; "  onclick="statusStatFilter('Adeudados')">
+								<div>
+									<div class="number"><span id="cuadro03_cantidad">0</span></div>
+									<div class="caption"><div>Deudores</div></div>
+								</div>
+							</article>
+
+						</div><!--.col-->
+
+						<div class="col-sm-2">
+							<article class="statistic-box "  style="background:#9c9;  cursor:pointer;"  onclick="statusStatFilter('todos los contactos')">
+								<div>
+									<div class="number"><span id="cuadro06_cantidad">0</span></div>
+									<div class="caption"><div>Todos los Contactos</div></div>
+								</div>
+							</article>
+						</div><!--.col-->
+
+
+						<div class="col-sm-2">
+							<article class="statistic-box "  style="background:#F2645E;  cursor:pointer;"  onclick="statusStatFilter('Rechazados')">
+								<div>
+									<div class="number"><span id="cuadro04_cantidad">0</span></div>
+									<div class="caption"><div>Rechazados</div></div>
+								</div>
+							</article>
+						</div><!--.col-->
+
+						
+
+					</div><!--.row-->
+
+
+				</div><!--.col-->
+
+				<div class="col-md-12">
+
+					<div class="row">
+						
+						<div class="col-sm-4">
+							<article class="statistic-box box2 " style="background:#9c9;  cursor:pointer;"  onclick="statusStatFilter('por firmar contrato')">
+								<div>
+									<div class="caption"><span id="cuadro31_cantidad">0</span> Por Firmar Contrato </div>
+								</div>
+							</article>
+						</div><!--.col-->
+
+						<div class="col-sm-4">
+							<article class="statistic-box box2 " style="background:#9c9;  cursor:pointer;"  onclick="statusStatFilterEspecial('por consignacion')">
+								<div>
+									<div class="caption"><span id="cuadro32_cantidad">0</span> Por Consignar Crédito </div>
+								</div>
+							</article>
+						</div><!--.col-->
+
+						<div class="col-sm-4">
+							<article class="statistic-box box2 " style="background:#9c9;  cursor:pointer;"  onclick="statusStatFilterEspecial('por cancelacion')">
+								<div>
+									<div class="caption"><span id="cuadro33_cantidad">0</span> Por Cancelar Crédito </div>
+								</div>
+							</article>
+						</div><!--.col-->
+
+
+					</div><!--.row-->
+
+
+					
+
+				</div>
+
+				<div class="col-md-12" style="display: none">
+
+					
+					<div class="col-xl-6">
+
+						<div class="card-block" style="text-align: center;">
+							<div id="pie-chart"></div>
+							<small><b>Porcentaje Estados de los contactos</b></small>
+						</div>
+
+					</div>
+
+					<div class="col-xl-6">
+
+						<div class="card-block" style="text-align: center;">
+							<div id="line-chart"></div>
+							<small><b>Movimiento de aplicaciones  en los ultimos 9 días</b></small>
+						</div>
+
+					</div>
+
+
+				</div>
+
+
+
+
+			</div>
+
+
+			<header class="page-content-header background002">
+				<div class="container-fluid">
+					<div class="tbl">
+						<div class="tbl-row">
+							<div class="tbl-cell">
+								<h3>Lista de Contactos <span class="filterText">  </span> </h3>
+							</div>
+							<div class="tbl-cell tbl-cell-action">
+								<a href="#" class="btn btn-success md-trigger" data-modal="modal-1">Nuevo Contacto</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</header><!--.page-content-header-->
+
+
+			<div class="row base-datatable" >
+
+				<div class="col-md-12 title-datatable" >
+
+					<div class="form-group">
+
+						<div class="col-md-2" style="text-align: left">
+						<!---	<select  id="statusSelect" class="bootstrap-select-status" tabindex="-98">
+					</select>-->
+				</div>
+
+				<div class="col-md-2">
+						<!---	<select  id="agentSelect" class="bootstrap-select-agent" tabindex="-98">
+					</select>-->
+				</div>
+
+				<div class="col-md-2">
+
+						<!---	<select  id="modeSelect" class="bootstrap-select-mode" tabindex="-98">
+					</select> -->
+
+
+				</div>
+
+				<div class="col-md-2">
+
+
+
+				</div>
+
+
+			</div>
+		</div>
+
+	</div>
+
+
+	<section class="card datatable">
+		<div class="card-block">
+			<table id="example"   class="display table table-striped" cellspacing="0" width="100%">
+
+			</table>
+		</div>		
+	</section>
+</div><!--.container-fluid-->
+</div><!--.page-content-->
+
+
+
+
+
+
+
+
+
+
+<div class="md-overlay"></div><!-- the overlay element -->
+
+<script src="js/lib/jquery/jquery.min.js"></script>
+<script src="js/lib/tether/tether.min.js"></script>
+<script src="js/lib/bootstrap/bootstrap.min.js"></script>
+<script src="js/lib/bootstrap-select/bootstrap-select.min.js"></script>
+<script src="js/lib/select2/select2.full.min.js"></script>
+<script src="js/lib/bootstrap-maxlength/bootstrap-maxlength.js"></script>
+<script src="js/lib/bootstrap-maxlength/bootstrap-maxlength-init.js"></script>	
+<script src="js/lib/input-mask/jquery.mask.min.js"></script>
+<script src="js/lib/input-mask/input-mask-init.js"></script>
+<script src="js/lib/d3/d3.min.js"></script>
+<script src="js/lib/charts-c3js/c3.min.js"></script>
+<script src="js/plugins.js"></script>
+<script src="js/moment.js"></script>
+<script src="js/lib/datatables-net/datatables.min.js"></script>
+<!-- classie.js by @desandro: https://github.com/desandro/classie -->
+<script src="js/lib/modal/js/classie.js"></script>
+<script src="js/lib/modal/js/modalEffects.js"></script>
+<script src="js/lib/bootstrap-sweetalert/sweetalert.min.js"></script>
+<!--
+	<script>
+		var polyfilter_scriptpath = '/js/';
+	</script>
+	<script src="js/lib/js/cssParser.js"></script>
+	<script src="js/lib/js/css-filters-polyfill.js"></script>
+-->
+<script src="js/data.js"></script>
+<script src="js/view.js"></script>
+<script src="js/app.js"></script>
+<script src="js/lead.js"></script>
+
+<script type="text/javascript">
+
+	$(document).ready(function(){
+	//inicializacion();
+	setApp("undefined");
+	create_datatableLeads();
+	ajx();
+	//loadSelectFilterStatus();
+	//loadSelectFilterAgent();
+	//loadSelectFilterMode();
+
+
+	$( "#agentSelect").change(function(event) {
+		event.preventDefault();
+		statusSelectFilter();
+	});
+
+
+	$( "#statusSelect").change(function(event) {
+		event.preventDefault();
+		statusSelectFilter();
+	});
+
+	$( "#modeSelect").change(function(event) {
+		event.preventDefault();
+		statusSelectFilter();
+	});
+
+	$("#submit-lead").click(function(event) {
+		event.preventDefault();
+		newLead();
+	});
+
+});
+
+
+
+</script>
+
+</body>
+</html>
